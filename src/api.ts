@@ -14,12 +14,13 @@ const POSTS = [
   { id: "5", name: "Post 5", description: "This is the fifth post" },
 ];
 
-export async function loadPosts() {
+export async function loadPosts({ limit }: { limit?: number }) {
   console.log("loadPosts");
   await wait(2000);
+  const posts = POSTS.map(({ description: _, ...post }) => post);
   return {
     crumb: "Posts",
-    posts: POSTS.map(({ description: _, ...post }) => post),
+    posts: typeof limit === "number" ? posts.slice(0, limit) : posts,
   };
 }
 export async function loadPost(id: string) {

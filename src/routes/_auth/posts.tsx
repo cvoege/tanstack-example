@@ -4,13 +4,17 @@ import z from "zod";
 
 export const Route = createFileRoute("/_auth/posts")({
   component: RouteComponent,
-  loader: () => loadPosts(),
-  validateSearch: z.object({ q: z.string().optional() }),
+  validateSearch: z.object({
+    q: z.string().optional(),
+    limit: z.number().optional(),
+  }),
+  loaderDeps: ({ search }) => ({ limit: search.limit }),
+  loader: ({ deps }) => loadPosts({ limit: deps.limit }),
 });
 
 function RouteComponent() {
   const { posts } = Route.useLoaderData();
-  const { q } = Route.useSearch();
+  const { q, limit } = Route.useSearch();
   return (
     <div>
       {posts.map((post) => (
@@ -23,7 +27,21 @@ function RouteComponent() {
 
       <hr />
 
-      <div>Query Param Value: {q}</div>
+      <div>Loader Query Param Value: {limit}</div>
+      <div>
+        <Link to="/posts" search={{ limit: 2 }}>
+          Limit to 2 Posts
+        </Link>
+      </div>
+      <div>
+        <Link to="/posts" search={{}}>
+          No Limit
+        </Link>
+      </div>
+
+      <hr />
+
+      <div>Non-Loader Query Param Value: {q}</div>
       <div>
         <Link to="/posts" search={{ q: "q1" }}>
           q1
@@ -34,6 +52,7 @@ function RouteComponent() {
           q2
         </Link>
       </div>
+
       <hr />
 
       <Outlet />

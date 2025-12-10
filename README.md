@@ -299,3 +299,13 @@ Files prefixed with `demo` can be safely deleted. They are there to provide a st
 # Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+
+# Notes
+
+* No path delay thing
+* The type safety is honestly incredible. Having loaders, breadcrumbs, and search params all so perfectly type safe. It's really sanguine whiile you code. Parent loaders are also type safe.
+* The loader dependencies and search params validators are not just amazing for type safety but are just perfect for making loaders only re-trigger when their exact dependencies do. It's really quite a type nirvana when it all clicks together.
+* Lazy loading and stuff is super automatic and seems to work well.
+* File path based routing is something I have never been 100% all in on. It forces your file structure into a slightly weird pattern and forces weird things like naming files `$id.tsx`. But I've never seen anyone do it better than tanstack. There's a huge amount of customizability and they handle all the edge cases really well, like being able to split paths out of a layout even when you want them to start with the same path as a layout. e.g. `src/routes/_auth/posts_.$id.edit.tsx`. So it's still not a perfect solution but it's as good as it can be.
+* The magic of the vite plugin feels kinda crazy but also really nice. Like if you move a route into a new directory it will correct everything. If you create a new route it will set up the scaffold so it instantly works.
+* The amount you get out of the box and the top level configurability of all that is pretty incredible. For example, you can set a default, app wide loading component, and also per-loader loading components. But by default tanstack does not render the loading indicators while routes load until loading has been going for 1 second. The idea is that just allowing the page to stay the same while the loading happens is better than the jitter of rendering a loading component for only a second. But if you don't like this behavior you can tweak or remove it with the top level config. Another example is that loaders are automatically cached based on their deps for whatever timeout you set. Another is really easy to set up preloading, so you can make it so when you hover a link the dependencies are loaded in the background. This is another reason for not immediately showing a loader, frequently you just wont have loading times at all.

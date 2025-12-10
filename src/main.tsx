@@ -7,6 +7,7 @@ import { routeTree } from "./routeTree.gen";
 
 import "./styles.css";
 import reportWebVitals from "./reportWebVitals.ts";
+import { finishLoad, startLoad } from "./components/LoadBar.tsx";
 
 // Create a new router instance
 const router = createRouter({
@@ -21,6 +22,9 @@ const router = createRouter({
   defaultPendingMs: 1000,
   defaultPendingMinMs: 500,
 });
+
+router.subscribe("onBeforeLoad", startLoad);
+router.subscribe("onLoad", finishLoad);
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
