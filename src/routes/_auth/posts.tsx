@@ -2,7 +2,7 @@ import { loadPosts } from "@/api";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import z from "zod";
 
-export const Route = createFileRoute("/posts")({
+export const Route = createFileRoute("/_auth/posts")({
   component: RouteComponent,
   loader: () => loadPosts(),
   validateSearch: z.object({ q: z.string().optional() }),
