@@ -8,7 +8,6 @@ import { LoadBar } from "@/components/LoadBar";
 export const Route = createRootRoute({
   component: () => (
     <>
-      {/*<Header />*/}
       <LoadBar />
       <Outlet />
       <TanStackDevtools

@@ -17,6 +17,7 @@ function RouteComponent() {
   const { q, limit } = Route.useSearch();
   return (
     <div>
+      <h2>Posts</h2>
       {posts.map((post) => (
         <div key={post.id}>
           <Link to="/posts/$id" params={{ id: post.id }}>

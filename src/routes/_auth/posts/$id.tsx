@@ -10,8 +10,8 @@ function RouteComponent() {
   const { post } = Route.useLoaderData();
   return (
     <div>
-      <div>{post.name}</div>
-      <div>{post.description}</div>
+      <h3>{post.name}</h3>
+      <p>{post.description}</p>
       <div>
         <Link to="/posts/$id/edit" params={{ id: post.id }}>
           Edit

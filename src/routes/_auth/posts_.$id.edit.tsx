@@ -11,7 +11,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <p>This is the edit page for {post.id}</p>
+      <h3>This is the edit page for {post.id}</h3>
       <div>
         <Link to="/posts/$id" params={{ id: post.id }}>
           Back to post
